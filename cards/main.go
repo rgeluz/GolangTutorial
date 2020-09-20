@@ -5,8 +5,8 @@ import "fmt"
 func main() {
 
 	//variableDeclaration()
-	slicesandloops()
-
+	//slicesandloops()
+	testNewDeck()
 }
 
 //Variable Declaration Lesson
@@ -39,14 +39,24 @@ func newCard1() int {
 
 //SlicesAndForLoops
 func slicesandloops() {
-	cards := []string{newCard(), newCard()} //or {"Ace of Diamonds", newCard}
+	//cards := []string{newCard(), newCard()} //or {"Ace of Diamonds", newCard}
+	cards := deck{newCard(), newCard()} //using deck.go's deck type
 
 	//add more elements to cards
 	cards = append(cards, "Six of Spades")
 	fmt.Println(cards)
 
-	//iterate slice of cards
-	for i, card := range cards {
+	//iterate slice of cards   //moved this to the deck type
+	/* for i, card := range cards {
 		fmt.Println(i, card)
 	}
+	*/
+
+	cards.print()
+}
+
+//Test newDeck() function
+func testNewDeck() {
+	cards := newDeck()
+	cards.print()
 }
