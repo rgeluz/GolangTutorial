@@ -6,7 +6,8 @@ func main() {
 
 	//variableDeclaration()
 	//slicesandloops()
-	testNewDeck()
+	//testNewDeck()
+	testShuffle()
 
 	//test type conversion
 	//greeting := "Hi there!"
@@ -82,5 +83,14 @@ func testNewDeck() {
 
 	//Read from existing file and create a new deck
 	cards := newDeckFromFile("my_cards")
+	cards.print()
+}
+
+func testShuffle() {
+	cards := newDeck()
+	cards.print()
+	fmt.Println("")
+
+	cards.shuffle()
 	cards.print()
 }
