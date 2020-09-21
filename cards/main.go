@@ -70,9 +70,17 @@ func testNewDeck() {
 	hand.print()
 	remainingCards.print()
 	*/
-	cards := newDeck()
-	fmt.Println(cards.toString())
 
-	//save list of cards to harddrive
-	cards.saveToFile("my_cards")
+	//Save new deck to file
+	/*
+		cards := newDeck()
+		fmt.Println(cards.toString())
+
+		//save list of cards to harddrive
+		cards.saveToFile("my_cards")
+	*/
+
+	//Read from existing file and create a new deck
+	cards := newDeckFromFile("my_cards")
+	cards.print()
 }
