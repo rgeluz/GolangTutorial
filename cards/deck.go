@@ -52,6 +52,7 @@ func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0666) //0666 is a default permission
 }
 
+//newDeckFromFile(). Load a list of cards from the local machine
 func newDeckFromFile(filename string) deck {
 	bs, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -64,7 +65,7 @@ func newDeckFromFile(filename string) deck {
 	return deck(s)
 }
 
-//shuffle()
+//shuffle(). Shuffles all the cards in a deck
 func (d deck) shuffle() {
 	source := rand.NewSource(time.Now().UnixNano()) //generate a new seed for random number generator
 	r := rand.New(source)
