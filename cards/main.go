@@ -59,4 +59,9 @@ func slicesandloops() {
 func testNewDeck() {
 	cards := newDeck()
 	cards.print()
+
+	hand, remainingCards := deal(cards, 5) //deal is defined in the same package main
+	hand.print()
+	remainingCards.print()
+
 }
