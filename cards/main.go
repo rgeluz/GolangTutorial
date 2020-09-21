@@ -7,6 +7,12 @@ func main() {
 	//variableDeclaration()
 	//slicesandloops()
 	testNewDeck()
+
+	//test type conversion
+	//greeting := "Hi there!"
+	//fmt.Println(greeting)         //Hi there!
+	//fmt.Println([]byte(greeting)) //[72 105 32 116 104 101 114 101 33]
+
 }
 
 //Variable Declaration Lesson
@@ -57,11 +63,16 @@ func slicesandloops() {
 
 //Test newDeck() function
 func testNewDeck() {
-	cards := newDeck()
+	/*cards := newDeck()
 	cards.print()
 
 	hand, remainingCards := deal(cards, 5) //deal is defined in the same package main
 	hand.print()
 	remainingCards.print()
+	*/
+	cards := newDeck()
+	fmt.Println(cards.toString())
 
+	//save list of cards to harddrive
+	cards.saveToFile("my_cards")
 }
