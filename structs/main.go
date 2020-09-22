@@ -54,12 +54,20 @@ func main() {
 	fmt.Println("")
 
 	//update first name
-	jim.updateName("jimmy")
+
+	//method 1
+	//jimPointer := &jim //pointer to variable jim  // & reference operator used to initialize pointer
+	//jimPointer.updateName("jimmy")
+
+	//method 2 Shortcut
+	jim.updateName("jimmy1")
+
 	jim.print()
+
 }
 
-func (p person) updateName(newFirstName string) {
-	p.firstName = newFirstName
+func (pointerToPerson *person) updateName(newFirstName string) {
+	(*pointerToPerson).firstName = newFirstName //* dereference operator to obtain the value of the variable the pointer is pointing to
 }
 
 //Structs with Receiver Functions
