@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -30,7 +31,33 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	fmt.Println(<-c) //receive a value from this channel and then log it
+	//fmt.Println(<-c) //receive a value from this channel and then log it. This is a blocking call, because it is waiting for a value
+
+	/*fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+
+	fmt.Println(<-c)*/ //This one will hang, because its waiting for antoher message, however there was only five go routines initiatied and five <-c received by the main go routine and printed
+
+	/* for i := 0; i < len(links); i++ {
+		fmt.Println(<-c)
+	} */
+
+	/*
+		for { // always true
+			go checkLink(<-c, c)
+		} */
+
+	//alternative loop syntax from above. l is link, and c is channel
+	for l := range c {
+		//go checkLink(l, c)
+		go func(link string) { //functional literal is equivalent to a anonymous function or lambda function
+			time.Sleep(5 * time.Second)
+			checkLink(link, c)
+		}(l)
+	}
+
 }
 
 //this function will be used as a goroutine
@@ -46,13 +73,16 @@ func main() {
 
 //this function uses a channel
 func checkLink(link string, c chan string) {
-	_, err := http.Get(link)
+	_, err := http.Get(link) //This is a blocking call, because it is waiting for a value
 	if err != nil {
 		fmt.Println(link, "might be down!")
-		c <- "Might be down I think"
+		//c <- "Might be down I think"
+		c <- link
 		return
 	}
 
 	fmt.Println(link, "is up!")
-	c <- "Yep its up"
+	//c <- "Yep its up"
+
+	c <- link
 }
